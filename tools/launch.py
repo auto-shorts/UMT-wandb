@@ -1,7 +1,7 @@
 # Copyright (c) THL A29 Limited, a Tencent company. All rights reserved.
 
 import argparse
-
+import wandb
 import nncore
 from nncore.engine import Engine, comm, set_random_seed
 from nncore.nn import build_model
@@ -37,10 +37,15 @@ def main():
     logger.info(f'Environment info:\n{nncore.collect_env_info()}')
     logger.info(f'Elastic launcher: {launcher}')
     logger.info(f'Config: {cfg.text}')
-
+    
+    wandb.init(
+        project="auto-shorts",
+        config=cfg.to_dict()
+    )
     seed = args.seed if args.seed is not None else cfg.get('seed')
     seed = set_random_seed(seed, deterministic=True)
     logger.info(f'Using random seed: {seed}')
+    wandb.log({"seed": seed})
 
     model = build_model(cfg.model, dist=bool(launcher))
     logger.info(f'Model architecture:\n{model.module}')
@@ -58,7 +63,8 @@ def main():
     elif checkpoint := args.resume:
         engine.resume(checkpoint)
 
-    engine.launch(eval=args.eval)
+    engine.launch()
+    engine.launch(eval=True)
 
 
 if __name__ == '__main__':
