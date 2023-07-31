@@ -64,7 +64,6 @@ def main():
         engine.resume(checkpoint)
 
     engine.launch()
-    engine.launch(eval=True)
 
 
 if __name__ == '__main__':
