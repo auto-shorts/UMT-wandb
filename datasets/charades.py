@@ -8,7 +8,7 @@ from nncore.dataset import DATASETS
 from nncore.ops import temporal_iou
 from nncore.parallel import DataContainer
 from torch.utils.data import Dataset
-from torchtext import vocab
+# from torchtext import vocab
 
 
 @DATASETS.register()
