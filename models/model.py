@@ -29,7 +29,10 @@ class UMT(nn.Module):
 
         self.apply(lambda m: xavier_init_(m)
                    if isinstance(m, nn.Linear) else None)
-
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        print("#" * 10, device)
+        print(f"Used device: {torch.cuda.get_device_name(0)}")
+                     
     def forward(self, data, mode):
         mask = torch.where(data['saliency'] >= 0, 1, 0)
 
