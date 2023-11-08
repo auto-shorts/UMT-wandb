@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 @DATASETS.register()
 class TVSum(Dataset):
 
-    SPLITS = TVSUM_SPLITS
+    SPLITS = {}
 
     def __init__(self,
                  domain,
