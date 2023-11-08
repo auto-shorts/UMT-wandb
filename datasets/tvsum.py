@@ -6,8 +6,6 @@ from nncore.dataset import DATASETS
 from nncore.parallel import DataContainer
 from torch.utils.data import Dataset
 
-from .utils import TVSUM_SPLITS
-
 
 @DATASETS.register()
 class TVSum(Dataset):
