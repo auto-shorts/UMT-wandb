@@ -10,3 +10,6 @@ __pycache__/
 /.vector_cache
 .DS_Store
 ._*
+venv/
+wandb/
+.env
