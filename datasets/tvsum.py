@@ -32,9 +32,9 @@ class TVSum(Dataset):
         optic = nncore.join(video_path, '{}_opt.npy')
         audio = nncore.join(audio_path, '{}.npy')
 
-        self.video = self.load_npy_files(video) 
-        self.optic = self.load_npy_files(optic) 
-        self.audio = self.load_npy_files(audio)
+        self.video = {k: nncore.load(video.format(k)) for k in self.label}
+        self.optic = {k: nncore.load(optic.format(k)) for k in self.label}
+        self.audio = {k: nncore.load(audio.format(k)) for k in self.label}
 
         self.video_id = {
             k: [s for s in self.SPLITS[domain][k] if s in self.label]
